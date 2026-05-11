@@ -1,0 +1,19 @@
+{
+  "name": "IBKR 报表精简分析",
+  "short_name": "IBKR收益",
+  "description": "离线解析 IBKR Activity Statement PDF，生成账户总览和股票/期权收益排行。",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f7f5",
+  "theme_color": "#1c5f4a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
