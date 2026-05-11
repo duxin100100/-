@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1c5f4a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="IBKR收益" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>IBKR 报表精简分析</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./assets/icon.svg" />
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="topbar">
+        <div>
+          <p class="eyebrow">IBKR Activity Statement</p>
+          <h1>报表收益面板</h1>
+        </div>
+        <button class="ghost-button" id="resetButton" type="button" hidden>重新上传</button>
+      </section>
+
+      <section class="upload-panel" id="uploadPanel">
+        <label class="drop-zone" for="pdfInput">
+          <span class="upload-icon">PDF</span>
+          <strong>上传 IBKR PDF 报表</strong>
+          <span>自动提取账户总览和股票/期权综合收益排行</span>
+          <input id="pdfInput" type="file" accept="application/pdf,.pdf" />
+        </label>
+        <p class="hint">支持 Activity Statement / 活动报表 PDF。解析在本机浏览器完成。</p>
+        <p class="offline-hint" id="offlineHint">正在准备离线缓存...</p>
+      </section>
+
+      <section class="status-panel" id="statusPanel" hidden>
+        <div class="spinner"></div>
+        <p id="statusText">正在解析 PDF...</p>
+      </section>
+
+      <section class="error-panel" id="errorPanel" hidden>
+        <strong>无法识别该 IBKR 报表</strong>
+        <p id="errorText">请确认上传的是 Activity Statement / 活动报表 PDF。</p>
+      </section>
+
+      <section class="result-panel" id="resultPanel" hidden>
+        <div id="captureArea">
+          <section class="summary-card">
+            <div class="summary-head">
+              <div>
+                <p class="section-label">账户总览</p>
+                <h2 id="endingValue">--</h2>
+              </div>
+              <div class="rate-pill" id="profitRate">--</div>
+            </div>
+            <div class="summary-grid">
+              <div>
+                <span>累积存款</span>
+                <strong id="cumulativeDeposit">--</strong>
+              </div>
+              <div>
+                <span>累计收益</span>
+                <strong id="totalProfit">--</strong>
+              </div>
+            </div>
+          </section>
+
+          <section class="ranking-section">
+            <div class="section-title-row">
+              <div>
+                <p class="section-label">股票/期权综合收益排行</p>
+                <h2>按总盈亏排序</h2>
+              </div>
+              <span id="symbolCount">0 个标的</span>
+            </div>
+            <div class="rank-list" id="rankList"></div>
+          </section>
+        </div>
+
+        <div class="actions">
+          <button class="primary-button" id="exportButton" type="button">导出面板截图</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
