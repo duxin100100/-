@@ -1,4 +1,4 @@
-const CACHE_VERSION = "ibkr-report-v7";
+const CACHE_VERSION = "ibkr-report-v9";
 const APP_SHELL = [
   "./",
   "./index.html",
