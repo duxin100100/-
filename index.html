@@ -23,6 +23,11 @@
         <button class="ghost-button" id="resetButton" type="button" hidden>重新上传</button>
       </section>
 
+      <section class="mode-switch" aria-label="选择解析方式">
+        <button class="mode-button active" id="pdfModeButton" type="button">上传 PDF</button>
+        <button class="mode-button" id="apiModeButton" type="button">IBKR API</button>
+      </section>
+
       <section class="upload-panel" id="uploadPanel">
         <label class="drop-zone" for="pdfInput">
           <span class="upload-icon">PDF</span>
@@ -32,6 +37,33 @@
         </label>
         <p class="hint">支持 Activity Statement / 活动报表 PDF。解析在本机浏览器完成。</p>
         <p class="offline-hint" id="offlineHint">正在准备离线缓存...</p>
+      </section>
+
+      <section class="api-panel" id="apiPanel" hidden>
+        <form class="api-form" id="apiForm">
+          <label>
+            <span>Flex Token</span>
+            <input id="flexTokenInput" type="password" autocomplete="off" placeholder="从 IBKR Flex Web Service 获取" required />
+          </label>
+          <label>
+            <span>Query ID</span>
+            <input id="queryIdInput" type="text" inputmode="numeric" placeholder="Flex Query ID" required />
+          </label>
+          <label>
+            <span>代理地址</span>
+            <input id="proxyUrlInput" type="url" placeholder="https://your-worker.workers.dev" required />
+          </label>
+          <label class="checkbox-row">
+            <input id="rememberApiInput" type="checkbox" checked />
+            <span>在本机保存 Query ID 和代理地址，不保存 Token</span>
+          </label>
+          <button class="primary-button" type="submit">从 IBKR 获取数据</button>
+        </form>
+        <details class="setup-help">
+          <summary>还没有代理地址？</summary>
+          <p>把仓库里的 <code>cloudflare-worker.js</code> 部署到 Cloudflare Workers，然后把 Worker 地址填到这里。</p>
+        </details>
+        <p class="hint">建议 Flex Query 只勾选账户摘要、Deposits & Withdrawals、Realized/Unrealized Performance Summary、Stocks、Stock and Index Options。</p>
       </section>
 
       <section class="status-panel" id="statusPanel" hidden>
@@ -79,12 +111,12 @@
         </div>
 
         <div class="actions">
-          <button class="primary-button" id="exportButton" type="button">导出面板截图</button>
+          <button class="primary-button" id="exportButton" type="button">截图</button>
         </div>
       </section>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="./vendor/html2canvas/html2canvas.min.js"></script>
     <script type="module" src="./src/app.js"></script>
   </body>
 </html>
